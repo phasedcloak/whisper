@@ -323,7 +323,12 @@ class Tokenizer:
 
 @lru_cache(maxsize=None)
 def get_encoding(name: str = "gpt2"):
-    vocab_path = os.path.join(os.path.dirname(__file__), "assets", f"{name}.tiktoken")
+    if os.environ.get('MELDIR') is None:
+        vocab_pre_path = os.path.dirname(__file__)
+    else:
+        vocab_pre_path = os.environ.get('MELDIR')
+
+    vocab_path = os.path.join(vocab_pre_path, "assets", f"{name}.titoken")
     ranks = {
         base64.b64decode(token): int(rank)
         for token, rank in (line.split() for line in open(vocab_path) if line)
