@@ -328,7 +328,7 @@ def get_encoding(name: str = "gpt2"):
     else:
         vocab_pre_path = os.environ.get('MELDIR')
 
-    vocab_path = os.path.join(vocab_pre_path, "assets", f"{name}.titoken")
+    vocab_path = os.path.join(vocab_pre_path, "assets", f"{name}.tiktoken")
     ranks = {
         base64.b64decode(token): int(rank)
         for token, rank in (line.split() for line in open(vocab_path) if line)
